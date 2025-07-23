@@ -1,0 +1,7 @@
+export enum Status {
+  EXPIRED = 'EXPIRED',
+  ACTIVE = 'ACTIVE',
+  UPCOMING = 'UPCOMING',
+  DELETED = 'DELETED',
+  NO_ACTIVE = 'NO_ACTIVE',
+}
