@@ -7,12 +7,14 @@ import { CountryModule } from './modules/country/country.module';
 import { GenreModule } from './modules/genre/genre.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CommentModule } from './modules/comment/comment.module';
+import { ImportExternalMoviesModule } from './import-external-movies/import-external-movies.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule.forRoot({ isGlobal: true })],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
@@ -29,6 +31,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     GenreModule,
     CountryModule,
     UserModule,
+    CommentModule,
+    ImportExternalMoviesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

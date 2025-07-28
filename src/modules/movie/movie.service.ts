@@ -51,14 +51,28 @@ export class MovieService {
   async findOne(id: number): Promise<MovieDetailsResponseDto> {
     const movie = await this.movieRepository.findOne({
       where: { id: id },
-      relations: { genres: true, country: true },
+      relations: { genres: true, country: true, comments: { user: true } },
     });
 
     if (!movie) {
       throw new NotFoundException('movie not found');
     }
 
-    return plainToInstance(MovieDetailsResponseDto, movie);
+    return plainToInstance(MovieDetailsResponseDto, movie, {
+      excludeExtraneousValues: true,
+    });
+  }
+
+  async findEntity(id: number): Promise<Movie> {
+    const movie = await this.movieRepository.findOne({
+      where: { id: id },
+      relations: { genres: true, country: true },
+    });
+
+    if (!movie) {
+      throw new NotFoundException('movie not found');
+    }
+    return movie;
   }
 
   async update(id: number, updateMovieDto: UpdateMovieDto): Promise<Movie> {

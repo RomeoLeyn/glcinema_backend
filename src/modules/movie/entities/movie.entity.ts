@@ -11,8 +11,10 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Comment } from 'src/modules/comment/entities/comment.entity';
 
 @Entity()
 export class Movie {
@@ -82,4 +84,7 @@ export class Movie {
 
   @Column({ type: 'enum', enum: Status, default: Status.NO_ACTIVE })
   status: Status;
+
+  @OneToMany(() => Comment, (comment) => comment.movie)
+  comments: Comment[];
 }

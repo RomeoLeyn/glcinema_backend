@@ -1,5 +1,6 @@
 import { Role } from 'src/common/enums/user-role.emuns';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Comment } from 'src/modules/comment/entities/comment.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -17,4 +18,7 @@ export class User {
 
   @Column()
   role: Role;
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }

@@ -10,5 +10,6 @@ import { CountryModule } from 'src/modules/country/country.module';
   imports: [TypeOrmModule.forFeature([Movie]), GenreModule, CountryModule],
   controllers: [MovieController],
   providers: [MovieService],
+  exports: [MovieService],
 })
 export class MovieModule {}
