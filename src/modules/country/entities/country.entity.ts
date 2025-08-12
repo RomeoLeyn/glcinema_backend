@@ -1,3 +1,4 @@
+import { Actor } from 'src/modules/actor/entities/actor.entity';
 import { Movie } from 'src/modules/movie/entities/movie.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -6,15 +7,25 @@ export class Country {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   code: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   name: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    name: 'flag_url',
+  })
   flagUrl: string;
 
   @OneToMany(() => Movie, (movie) => movie.country)
   movies: Movie[];
+
+  @OneToMany(() => Actor, (actor) => actor.country)
+  actors: Actor[];
 }

@@ -42,16 +42,27 @@ export class MovieService {
       relations: {
         genres: true,
         country: true,
+        actors: { country: true },
+      },
+      order: {
+        createdAt: 'DESC',
       },
     });
 
-    return plainToInstance(MoviesResponseDto, movies);
+    return plainToInstance(MoviesResponseDto, movies, {
+      excludeExtraneousValues: true,
+    });
   }
 
   async findOne(id: number): Promise<MovieDetailsResponseDto> {
     const movie = await this.movieRepository.findOne({
       where: { id: id },
-      relations: { genres: true, country: true, comments: { user: true } },
+      relations: {
+        genres: true,
+        country: true,
+        comments: { user: true },
+        actors: { country: true },
+      },
     });
 
     if (!movie) {

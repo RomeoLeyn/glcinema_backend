@@ -18,5 +18,6 @@ export function createMovieFromDto(createMovieDto: CreateMovieDto) {
     ageLimit: createMovieDto.ageLimit,
     startRentalDate: createMovieDto.startRentalDate,
     finalRentalDate: createMovieDto.finalRentalDate,
+    actors: createMovieDto.actors.map((id) => ({ id })),
   };
 }

@@ -3,10 +3,12 @@ import { Movie } from 'src/modules/movie/entities/movie.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -22,29 +24,21 @@ export class Comment {
   @JoinColumn({ name: 'movie_id' })
   movie: Movie;
 
-  @Column({ name: 'content' })
+  @Column({ type: 'varchar' })
   content: string;
 
-  @Column({ name: 'likes', default: 0 })
+  @Column({ unsigned: true, default: 0 })
   likes: number;
 
-  @Column({ name: 'dislikes', default: 0 })
+  @Column({ unsigned: true, default: 0 })
   dislikes: number;
 
   @Column({ name: 'status', default: CommentStatus.UNDVERIFIED })
   status: CommentStatus;
 
-  @Column({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'written_at',
-  })
+  @CreateDateColumn({ name: 'written_at' })
   writtenAt: Date;
 
-  @Column({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'updated_at',
-  })
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

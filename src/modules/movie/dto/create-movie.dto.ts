@@ -5,9 +5,11 @@ import {
   IsDate,
   IsEnum,
   IsInt,
+  IsPositive,
   IsString,
   IsUrl,
   Max,
+  MaxLength,
   Min,
   MinLength,
 } from 'class-validator';
@@ -16,9 +18,11 @@ import { AgeLimit } from 'src/common/enums/age-limit.enum';
 import { Format } from 'src/common/enums/format.enum';
 
 export class CreateMovieDto {
+  @MaxLength(128, { message: 'Max 128 symbols' })
   @MinLength(3, { message: 'Min 3 symbols' })
   titleUkr: string;
 
+  @MaxLength(128, { message: 'Max 128 symbols' })
   @MinLength(3, { message: 'Min 3 symbols' })
   titleOriginal: string;
 
@@ -39,9 +43,11 @@ export class CreateMovieDto {
   dubLanguage: string;
 
   @IsInt()
+  @IsPositive()
   countryId: number;
 
   @IsInt()
+  @IsPositive()
   duration: number;
 
   @MinLength(30, { message: 'Min length 30 symbols' })
@@ -63,4 +69,8 @@ export class CreateMovieDto {
   @IsDate({ message: 'startRentalDate must be a valid date' })
   @Type(() => Date)
   finalRentalDate: Date;
+
+  @IsArray()
+  @ArrayNotEmpty({ message: 'At least one actors must be selected' })
+  actors: number[];
 }

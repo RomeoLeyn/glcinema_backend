@@ -5,6 +5,7 @@ import { Status } from 'src/common/enums/status.enum';
 import { GenreResponseDto } from 'src/modules/genre/dto/genre-response.dto';
 import { CommentResponseDto } from 'src/modules/comment/dto/comment-response.dto';
 import { Expose, Type } from 'class-transformer';
+import { ActorResponseDto } from 'src/modules/actor/dto/actor-response.dto';
 
 export class MovieDetailsResponseDto {
   @Expose()
@@ -25,6 +26,10 @@ export class MovieDetailsResponseDto {
   @Expose()
   @Type(() => GenreResponseDto)
   genres: GenreResponseDto[];
+
+  @Expose()
+  @Type(() => ActorResponseDto)
+  actors: ActorResponseDto[];
 
   @Expose()
   dubLanguage: string;
